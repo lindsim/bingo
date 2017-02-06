@@ -33,3 +33,4 @@ function drawTiles() {
 
   }
 }
+//change so phrases are drawn separately after initial board created?
