@@ -1,12 +1,14 @@
+
+
 var Tile = function(x, y, dem) {
   this.x = x;
   this.y = y;
   this.dem = dem;
   this.color = 'white';
 }
+var tiles = [];
 
 function makeTiles() {
-  var tiles = [];
   var w = document.getElementById('board').width
   var space = 10;
   var xCoord = space;
@@ -25,7 +27,7 @@ function makeTiles() {
  drawTiles(tiles)
 }
 
-function drawTiles(tiles) {
+function drawTiles(tiles, click) {
   var canvas = document.getElementById('board');
   var ctx = canvas.getContext('2d');
   var size = 3;
@@ -36,6 +38,20 @@ function drawTiles(tiles) {
     }
   }
 }
+
+Tile.prototype.isUnderMouse = function(x, y) {
+    return x >= this.x && x <= this.x + this.width  &&
+        y >= this.y && y <= this.y + this.width;
+};
+
+mouseClicked = function(tiles) {     
+	console.log('here')
+	for (var i = 0; i < 9; i++) {
+  	if (tiles[i].isUnderMouse(mouseX, mouseY)) {
+    	changeColor(tiles[i]);
+        }
+    }
+};
 
 
 /*function assignPhrases(tile){
@@ -50,12 +66,11 @@ change this to read file and choose random list of size * size
 }
 */
 
-/*changeColor(tile){
+function changeColor(tile){
   if (tile.color == 'white'){
     tile.color = 'black'
-  }
-  else {
+  } else {
     tile.color = 'white'
   }
 }
-*/
+
