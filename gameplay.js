@@ -1,8 +1,9 @@
-var Tile = function(x, y, dem) {
+var Tile = function(x, y, dem, phrase) {
   this.x = x;
   this.y = y;
   this.dem = dem;
   this.color = 'white';
+  this.phrase = phrase;
 }
 var tiles = [];
 
@@ -17,7 +18,7 @@ function makeTiles() {
   for (var j = 0; j < size; j++) {
     xCoord = space
     for (var i = 0; i < size; i++) {
-      tiles.push(new Tile(xCoord, yCoord, dem));
+      tiles.push(new Tile(xCoord, yCoord, dem, getPhrase()));
       xCoord += (dem + space)
     }
     yCoord += (dem + space)
@@ -49,6 +50,12 @@ onclick = function(mouseInfo) {
   }
 };
 
+function getPhrase() {
+  var phrases = ["dog", "cat", "fish", "pig", "turtle", "goblin", "turkey", "child", "gecko"];
+  return phrases.pop();
+}
+
+
 
 function drawPhrases() {
   var phrases = ["dog", "cat", "fish", "pig", "turtle", "goblin", "turkey", "child", "gecko"];
@@ -56,7 +63,7 @@ function drawPhrases() {
   var ctx = canvas.getContext('2d');
   ctx.fillStyle = 'purple';
   for (t = 0; t < 9; t++) {
-    ctx.fillText(phrases.pop(), tiles[t].x + 20, tiles[t].y + 20);
+    ctx.fillText(tiles[t].phrase, tiles[t].x + 20, tiles[t].y + 20);
   }
 }
 
@@ -66,13 +73,18 @@ function changeColor(tile) {
   if (canvas.getContext) {
     var cx = canvas.getContext('2d');
     if (tile.color == 'white') {
-      cx.fillStyle = 'black';
+      cx.fillStyle = 'gray';
       cx.fillRect(tile.x, tile.y, tile.dem, tile.dem);
       tile.color = 'black';
+      cx.fillStyle = 'purple';
+      cx.fillText(tile.phrase, tile.x + 20, tile.y + 20);
     } else {
-      tile.color = 'white';
+      tile.color = 'white'
       cx.fillStyle = 'white';
       cx.fillRect(tile.x, tile.y, tile.dem, tile.dem);
+      cx.fillStyle = 'purple';
+      cx.fillText(tile.phrase, tile.x + 20, tile.y + 20);
     }
   }
 }
+
