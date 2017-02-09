@@ -1,5 +1,3 @@
-
-
 var Tile = function(x, y, dem) {
   this.x = x;
   this.y = y;
@@ -24,53 +22,57 @@ function makeTiles() {
     }
     yCoord += (dem + space)
   }
- drawTiles(tiles)
+  drawTiles(tiles)
 }
 
-function drawTiles(tiles, click) {
+function drawTiles(tiles) {
   var canvas = document.getElementById('board');
   var ctx = canvas.getContext('2d');
   var size = 3;
   if (canvas.getContext) {
-    for (var t = 0; t < (size * size); t++) {
+    for (var t = 0; t < 9; t++) {
       ctx.fillStyle = tiles[t].color;
       ctx.fillRect(tiles[t].x, tiles[t].y, tiles[t].dem, tiles[t].dem)
     }
   }
+  drawPhrases(tiles);
 }
 
-Tile.prototype.isUnderMouse = function(x, y) {
-    return x >= this.x && x <= this.x + this.width  &&
-        y >= this.y && y <= this.y + this.width;
-};
 
-mouseClicked = function(tiles) {     
-	console.log('here')
-	for (var i = 0; i < 9; i++) {
-  	if (tiles[i].isUnderMouse(mouseX, mouseY)) {
-    	changeColor(tiles[i]);
-        }
+onclick = function(mouseInfo) {
+  var x = (mouseInfo.offsetX);
+  var y = (mouseInfo.offsetY);
+  for (var i = 0; i < 9; i++) {
+    if (tiles[i].x <= x && x <= (tiles[i].x + tiles[i].dem) && tiles[i].y <= y && y <= (tiles[i].y + tiles[i].dem)) {
+      changeColor(tiles[i]);
     }
+  }
 };
 
 
-/*function assignPhrases(tile){
-change this to read file and choose random list of size * size 
-	var phrases = [
-      ["dog", "cat", "fish"],
-      ["pig", "turtle", "goblin"],
-      ["turkey", "child", "gecko"]
-    ];
-    
-   tile.phrase = phrases.pop(); 
-}
-*/
-
-function changeColor(tile){
-  if (tile.color == 'white'){
-    tile.color = 'black'
-  } else {
-    tile.color = 'white'
+function drawPhrases() {
+  var phrases = ["dog", "cat", "fish", "pig", "turtle", "goblin", "turkey", "child", "gecko"];
+  var canvas = document.getElementById('board');
+  var ctx = canvas.getContext('2d');
+  ctx.fillStyle = 'purple';
+  for (t = 0; t < 9; t++) {
+    ctx.fillText(phrases.pop(), tiles[t].x + 20, tiles[t].y + 20);
   }
 }
 
+function changeColor(tile) {
+  var canvas = document.getElementById('board');
+
+  if (canvas.getContext) {
+    var cx = canvas.getContext('2d');
+    if (tile.color == 'white') {
+      cx.fillStyle = 'black';
+      cx.fillRect(tile.x, tile.y, tile.dem, tile.dem);
+      tile.color = 'black';
+    } else {
+      tile.color = 'white';
+      cx.fillStyle = 'white';
+      cx.fillRect(tile.x, tile.y, tile.dem, tile.dem);
+    }
+  }
+}
