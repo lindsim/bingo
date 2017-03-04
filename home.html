@@ -3,30 +3,14 @@
   <head>
     <title>Lifetime Bingo</title>
   </head>
- <body>
+ <h1>Lifetime Bingo</h1>
+ <h2>Click square to mark or unmark mark.</h2>
+
+ <body onload="newGame();">
   <div class="bingoboard">
     <canvas id="board" width="600" height="600"></canvas>
   </div>
-  <div class="stampoptions">
-    <label>Select stamp shape:
-    <input list="shapes" name="stamp-shapes"/></label>
-    <datalist id="shapes">
-       <option value="star">
-       <option value="circle">
-       <option value="cat">
-       <option value="dog">
-       <option value="tv">
-    </datalist>
-    <br>
-      Select stamp color:
-    <input id="stamp-color" type="color">
-  </div>
-  <div class="boardoptions">
-    <div id="size">
-      <input type="Radio" Name="size" Value="3">3x3
-      <input type="Radio" Name="size" Value="5">5x5
-      <input type="Radio" Name="size" Value="7">7x7
-    </div>
-  </div>
+  <menu>
+  </menu>
  </body>
 </html>  
