@@ -1,4 +1,3 @@
-
 var Tile = function(x, y, dem, phrase, count) {
   this.x = x;
   this.y = y;
@@ -7,6 +6,7 @@ var Tile = function(x, y, dem, phrase, count) {
   this.phrase = phrase;
   this.count = count;
 }
+
 
 
 function newGame() {
@@ -18,7 +18,7 @@ function newGame() {
   var tiles = [];
   var counters = Array.apply(null, Array(size + size + 2)).map(Number.prototype.valueOf, 0);
   var phrases = ["dog", "cat", "fish", "pig", "turtle", "goblin", "turkey", "child", "gecko"];
-	makeTiles();
+  makeTiles();
 
   function makeTiles() {
     var w = document.getElementById('board').width;
@@ -85,92 +85,58 @@ function newGame() {
         changeColor(tiles[i], counters, size);
       }
     }
-  };
+  }
 
 }
 
 
 
-  function countUp(tile, counters, size) {
-    for (t = 0; t < tile.count.length; t++) {
-      counters[tile.count[t]] += 1;
-      if (counters[tile.count[t]] == size) {
-        drawBingo();
-        gameOverState();
-      }
-    }
-  }
-
-  function countDown(tile, counters) {
-    for (t = 0; t < tile.count.length; t++) {
-      counters[tile.count[t]] -= 1;
-    }
-  }
-
-	function gameOverState(){
-  	 onclick = function(mouseInfo) {}
-  }
-
-  function drawBingo() {
-    var canvas = document.getElementById('board');
-    var ctx = canvas.getContext('2d');
-    console.log("bingo");
-  }
-
-  function changeColor(tile, counters, size) {
-    var canvas = document.getElementById('board');
-    if (canvas.getContext) {
-      var cx = canvas.getContext('2d');
-      if (tile.color == 'white') {
-        countUp(tile, counters, size);
-        cx.fillStyle = 'gray';
-        cx.fillRect(tile.x, tile.y, tile.dem, tile.dem);
-        tile.color = 'black';
-        cx.fillStyle = 'purple';
-        cx.fillText(tile.phrase, tile.x + 20, tile.y + 20);
-      } else {
-        countDown(tile, counters);
-        tile.color = 'white'
-        cx.fillStyle = 'white';
-        cx.fillRect(tile.x, tile.y, tile.dem, tile.dem);
-        cx.fillStyle = 'purple';
-        cx.fillText(tile.phrase, tile.x + 20, tile.y + 20);
-      }
+function countUp(tile, counters, size) {
+  for (t = 0; t < tile.count.length; t++) {
+    counters[tile.count[t]] += 1;
+    if (counters[tile.count[t]] == size) {
+      drawBingo();
+      gameOverState();
     }
   }
 }
 
-function makeTiles() {
-  var tiles = [];
-  var w = document.getElementById('board').width
-  var space = 10;
-  var xCoord = space;
-  var yCoord = space;
-  var size = 3;
-  var dem = (w - space * (size + 1)) / size;
-
-  for (var j = 0; j < size; j++) {
-    xCoord = space
-    for (var i = 0; i < size; i++) {
-      tiles.push(new Tile(xCoord, yCoord, dem));
-      xCoord += (dem + space)
-    }
-    yCoord += (dem + space)
+function countDown(tile, counters) {
+  for (t = 0; t < tile.count.length; t++) {
+    counters[tile.count[t]] -= 1;
   }
- drawTiles(tiles)
 }
 
-function drawTiles(tiles) {
+function gameOverState() {
+  onclick = function(mouseInfo) {}
+  
+}
+
+function drawBingo() {
   var canvas = document.getElementById('board');
   var ctx = canvas.getContext('2d');
-  var size = 3;
+
+  
+}
+
+function changeColor(tile, counters, size) {
+  var canvas = document.getElementById('board');
   if (canvas.getContext) {
-    for (var t = 0; t < (size * size); t++) {
-      ctx.fillStyle = tiles[t].color;
-      ctx.fillRect(tiles[t].x, tiles[t].y, tiles[t].dem, tiles[t].dem)
+    var cx = canvas.getContext('2d');
+    if (tile.color == 'white') {
+      countUp(tile, counters, size);
+      cx.fillStyle = 'gray';
+      cx.fillRect(tile.x, tile.y, tile.dem, tile.dem);
+      tile.color = 'black';
+      cx.fillStyle = 'purple';
+      cx.fillText(tile.phrase, tile.x + 20, tile.y + 20);
+    } else {
+      countDown(tile, counters);
+      tile.color = 'white'
+      cx.fillStyle = 'white';
+      cx.fillRect(tile.x, tile.y, tile.dem, tile.dem);
+      cx.fillStyle = 'purple';
+      cx.fillText(tile.phrase, tile.x + 20, tile.y + 20);
     }
   }
 }
-
-
-
