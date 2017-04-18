@@ -138,7 +138,7 @@ function newGame() {
       }
     }
   }
-}
+
 
 function makeTiles() {
   var tiles = [];
