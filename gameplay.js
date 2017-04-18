@@ -1,4 +1,3 @@
-
 var Tile = function(x, y, dem, phrase, count) {
   this.x = x;
   this.y = y;
@@ -18,7 +17,7 @@ function newGame() {
   var tiles = [];
   var counters = Array.apply(null, Array(size + size + 2)).map(Number.prototype.valueOf, 0);
   var phrases = ["dog", "cat", "fish", "pig", "turtle", "goblin", "turkey", "child", "gecko"];
-	makeTiles();
+  makeTiles();
 
   function makeTiles() {
     var w = document.getElementById('board').width;
@@ -85,37 +84,27 @@ function newGame() {
         changeColor(tiles[i], counters, size);
       }
     }
-  };
+  }
 
 }
 
 
 
-  function countUp(tile, counters, size) {
-    for (t = 0; t < tile.count.length; t++) {
-      counters[tile.count[t]] += 1;
-      if (counters[tile.count[t]] == size) {
-        drawBingo();
-        gameOverState();
-      }
+function countUp(tile, counters, size) {
+  for (t = 0; t < tile.count.length; t++) {
+    counters[tile.count[t]] += 1;
+    if (counters[tile.count[t]] == size) {
+      drawBingo();
+      gameOverState();
     }
   }
+}
 
-  function countDown(tile, counters) {
-    for (t = 0; t < tile.count.length; t++) {
-      counters[tile.count[t]] -= 1;
-    }
+function countDown(tile, counters) {
+  for (t = 0; t < tile.count.length; t++) {
+    counters[tile.count[t]] -= 1;
   }
-
-	function gameOverState(){
-  	 onclick = function(mouseInfo) {}
-  }
-
-  function drawBingo() {
-    var canvas = document.getElementById('board');
-    var ctx = canvas.getContext('2d');
-    console.log("bingo");
-  }
+}
 
   function changeColor(tile, counters, size) {
     var canvas = document.getElementById('board');
@@ -139,38 +128,13 @@ function newGame() {
     }
   }
 
-
-function makeTiles() {
-  var tiles = [];
-  var w = document.getElementById('board').width
-  var space = 10;
-  var xCoord = space;
-  var yCoord = space;
-  var size = 3;
-  var dem = (w - space * (size + 1)) / size;
-
-  for (var j = 0; j < size; j++) {
-    xCoord = space
-    for (var i = 0; i < size; i++) {
-      tiles.push(new Tile(xCoord, yCoord, dem));
-      xCoord += (dem + space)
-    }
-    yCoord += (dem + space)
-  }
- drawTiles(tiles)
+function gameOverState() {
+  onclick = function(mouseInfo) {}
+  
 }
-
-function drawTiles(tiles) {
+function drawBingo() {
   var canvas = document.getElementById('board');
   var ctx = canvas.getContext('2d');
-  var size = 3;
-  if (canvas.getContext) {
-    for (var t = 0; t < (size * size); t++) {
-      ctx.fillStyle = tiles[t].color;
-      ctx.fillRect(tiles[t].x, tiles[t].y, tiles[t].dem, tiles[t].dem)
-    }
-  }
 }
-
 
 
