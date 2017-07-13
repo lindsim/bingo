@@ -23,9 +23,6 @@ function newGame() {
   function makeTiles(tiles) {
     //make tile buttons
     //get phrase list and match them up
-    //first tile is r 0 c 0; second is r0 c1
-
-
     //this.phrase = allPhrases[index]
   
   }
@@ -36,8 +33,8 @@ function newGame() {
 
 
   function getPhrases() {
-    //parse file and randomly choose sqsize of them 
-    //return phrase list
+    return phrases
+    //from firebase - for not use others
   }
 
   function bingoCheck() {
@@ -55,6 +52,7 @@ function newGame() {
     //tile 1? tile 2? 
     //tile 4? tile 8? 
     //essentially go down tree
+    // 0 -- is 1? no. is 3? no. 
   }
 
 function countUp(tile, counters, size) {
