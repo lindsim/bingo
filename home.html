@@ -3,17 +3,17 @@
 <html>
   <head>
   <script type="text/javascript" src="gameplay.js"></script>
-  <style rel="stylesheet" type="text/css" href="style.css"></style>
+  <link href="style.css" rel="stylesheet"></link>
     <title>Lifetime Bingo</title>
   </head>
  <h1>Lifetime Bingo</h1>
  <h2>Click a square to mark or remove the mark.</h2>
 
  <body onload="newGame();">
-  <div class="bingoboard">
+  <div id="bingoboard">
     <canvas id="board" width="600" height="600"></canvas>
   </div>
-  <div class="controls">
+  <div id="controls">
     <button onclick="newGame();" name="new">New bingo board</button>
   </div>
  </body>

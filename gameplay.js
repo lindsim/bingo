@@ -1,7 +1,6 @@
-var Tile = function(x, y, dem, phrase, count) {
-  this.x = x;
-  this.y = y;
-  this.dem = dem;
+var Tiles = function(row, column, phrase, count) {
+  this.row = row;
+  this.column = column;
   this.color = 'white';
   this.phrase = phrase;
   this.count = count;
@@ -14,81 +13,49 @@ function newGame() {
 
   var size = 3;
   var sizesq = size * size;
-  var tiles = [];
+
   var counters = Array.apply(null, Array(size + size + 2)).map(Number.prototype.valueOf, 0);
   var phrases = ["dog", "cat", "fish", "pig", "turtle", "goblin", "turkey", "child", "gecko"];
   makeTiles();
 
-  function makeTiles() {
-    var w = document.getElementById('board').width;
-    var space = 10;
-    var xCoord = space;
-    var yCoord = space;
-    var dem = (w - space * (size + 1)) / size;
 
-    for (var j = 0; j < size; j++) {
-      xCoord = space
-      for (var i = 0; i < size; i++) {
-        tiles.push(new Tile(xCoord, yCoord, dem, getPhrase(), getCount(j, i)));
-        xCoord += (dem + space)
-      }
-      yCoord += (dem + space)
-    }
-    drawTiles(tiles)
+
+  function makeTiles(tiles) {
+    //make tile buttons
+    //get phrase list and match them up
+    //first tile is r 0 c 0; second is r0 c1
+
+
+    //this.phrase = allPhrases[index]
+  
   }
 
-  function getCount(xCoordPair, yCoordPair) {
-    var countThese = [];
-    countThese.push(yCoordPair + size);
-    countThese.push(xCoordPair);
-    if (xCoordPair == yCoordPair) {
-      countThese.push(size * 2);
-      if (xCoordPair == (size - 1) / 2) {
-        countThese.push(size * 2 + 1);
-      }
-    } else if (xCoordPair + yCoordPair == (size - 1)) {
-      countThese.push(size * 2 + 1);
-    }
-    return countThese
+    function makeBoard() {
+    //make a table and fill it with buttons as it goes
   }
 
-  function drawTiles(tiles) {
-    var canvas = document.getElementById('board');
-    var ctx = canvas.getContext('2d');
-    if (canvas.getContext) {
-      for (var t = 0; t < sizesq; t++) {
-        ctx.fillStyle = tiles[t].color;
-        ctx.fillRect(tiles[t].x, tiles[t].y, tiles[t].dem, tiles[t].dem)
-      }
-    }
-    drawPhrases(tiles);
+
+  function getPhrases() {
+    //parse file and randomly choose sqsize of them 
+    //return phrase list
   }
 
-  function drawPhrases() {
-    var canvas = document.getElementById('board');
-    var ctx = canvas.getContext('2d');
-    ctx.fillStyle = 'purple';
-    for (t = 0; t < sizesq; t++) {
-      ctx.fillText(tiles[t].phrase, tiles[t].x + 20, tiles[t].y + 20);
-    }
+  function bingoCheck() {
+    //only called when at least size num of buttons clicked
+    //checks for r, c
+    //bingos happen at 3 r's the same, 3 c's the same, or [r0, c0] [r1 c1] [r2, c2]
+    //and [r0 c2], [r1 c1], 
+    //or we could index them - 036, 147, 258, 012, 345, 678, 048, 346 for 
+    //quicker access; we couldn't need to assign them r's or c's or even an index number
+    //we'd have that in the list of tiles 
+    //0 + size + size
+    //1 + size + size
+    //2 + size + size
+    //if tile[0] is clicked is tile 3? tile 6? 
+    //tile 1? tile 2? 
+    //tile 4? tile 8? 
+    //essentially go down tree
   }
-
-  function getPhrase() {
-    return phrases.pop();
-  }
-  onclick = function(mouseInfo) {
-    var x = (mouseInfo.offsetX);
-    var y = (mouseInfo.offsetY);
-    for (var i = 0; i < sizesq; i++) {
-      if (tiles[i].x <= x && x <= (tiles[i].x + tiles[i].dem) && tiles[i].y <= y && y <= (tiles[i].y + tiles[i].dem)) {
-        changeColor(tiles[i], counters, size);
-      }
-    }
-  }
-
-}
-
-
 
 function countUp(tile, counters, size) {
   for (t = 0; t < tile.count.length; t++) {
@@ -106,35 +73,14 @@ function countDown(tile, counters) {
   }
 }
 
-  function changeColor(tile, counters, size) {
-    var canvas = document.getElementById('board');
-    if (canvas.getContext) {
-      var cx = canvas.getContext('2d');
-      if (tile.color == 'white') {
-        countUp(tile, counters, size);
-        cx.fillStyle = 'gray';
-        cx.fillRect(tile.x, tile.y, tile.dem, tile.dem);
-        tile.color = 'black';
-        cx.fillStyle = 'purple';
-        cx.fillText(tile.phrase, tile.x + 20, tile.y + 20);
-      } else {
-        countDown(tile, counters);
-        tile.color = 'white'
-        cx.fillStyle = 'white';
-        cx.fillRect(tile.x, tile.y, tile.dem, tile.dem);
-        cx.fillStyle = 'purple';
-        cx.fillText(tile.phrase, tile.x + 20, tile.y + 20);
-      }
-    }
-  }
 
 function gameOverState() {
   onclick = function(mouseInfo) {}
   
 }
+
 function drawBingo() {
   var canvas = document.getElementById('board');
   var ctx = canvas.getContext('2d');
 }
-
-
+}
