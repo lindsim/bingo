@@ -1,13 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Courgette|Raleway');
+
 $color-main: #993355;
 $color-bright: #ff3355;
 $color-accent: #663355;
 $color-dark: #333355;
 $color-accent-2: #cc3355;
+
 $fancy-font: 'Courgette',
 cursive;
 $standard-font: 'Raleway',
 sans-serif;
+
 canvas {
   border: solid 5px $color-dark;
   background-color: $color-main;

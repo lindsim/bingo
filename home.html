@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Lifetime Bingo</title>
+  <meta charset="utf-8">
+  <head> <script type="text/javascript" src="gameplay.js"></script>
+  <link href="style.css" rel="stylesheet"></link>
+  <title>Lifetime Bingo</title>
   </head>
- <h1>Lifetime Bingo</h1>
- <h2>Click square to mark or unmark mark.</h2>
+  <body>
+    <h1>Lifetime Bingo</h1>
+    <h2>Click a square to mark or remove the mark.</h2>
+    <body onload="newGame(3);">
+    <div class="bingoboard" id="firstboard">
+    </div>
+    <div id="controls">
+      <button onclick="newGame();" name="new" class="button-control">New bingo board</button>
+    </div>
 
- <body onload="newGame();">
-  <div class="bingoboard">
-    <canvas id="board" width="600" height="600"></canvas>
-  </div>
-  <menu>
-  </menu>
  </body>
 </html>  
