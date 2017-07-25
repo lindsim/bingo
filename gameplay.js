@@ -1,39 +1,37 @@
-var Tiles = function(row, column, phrase, count) {
-  this.row = row;
-  this.column = column;
-  this.color = 'white';
-  this.phrase = phrase;
-  this.count = count;
-}
-
-
 function newGame() {
   //get input if needbe to assign these variables
   //start game
+  //if current size == past size, no need to call makeBoard();
 
   var size = 3;
   var sizesq = size * size;
-
-  var counters = Array.apply(null, Array(size + size + 2)).map(Number.prototype.valueOf, 0);
   var phrases = ["dog", "cat", "fish", "pig", "turtle", "goblin", "turkey", "child", "gecko"];
-  makeTiles();
+  fillBoard();
 
-
-
-  function makeTiles(tiles) {
-    //make tile buttons
-    //get phrase list and match them up
-    //this.phrase = allPhrases[index]
-  
+  function fillBoard(){
+    if (document.getElementsByClassName('button-square').length !== sizesq){
+      createSquares();
+    } else {
+      newPhrases();
+    }
   }
 
-    function makeBoard() {
-    //make a table and fill it with buttons as it goes
+  function createSquares() {
+    for (var x = 0; x < sizesq; x++){
+        var button     = document.createElement('button');
+        button.className = 'button-square';
+        button.id = x;
+        button.innerHTML = phrases[x];
+        document.getElementById('firstboard').appendChild(button);
+    }
+    
   }
 
 
-  function getPhrases() {
-    return phrases
+  function newPhrases() {
+    for (var i = 0; i < sizesq; i++){
+      document.getElementById(i).innerHTML = phrases[8 - i];
+    }
     //from firebase - for not use others
   }
 
@@ -55,30 +53,12 @@ function newGame() {
     // 0 -- is 1? no. is 3? no. 
   }
 
-function countUp(tile, counters, size) {
-  for (t = 0; t < tile.count.length; t++) {
-    counters[tile.count[t]] += 1;
-    if (counters[tile.count[t]] == size) {
-      drawBingo();
-      gameOverState();
-    }
-  }
-}
-
-function countDown(tile, counters) {
-  for (t = 0; t < tile.count.length; t++) {
-    counters[tile.count[t]] -= 1;
-  }
-}
-
 
 function gameOverState() {
-  onclick = function(mouseInfo) {}
   
 }
 
 function drawBingo() {
-  var canvas = document.getElementById('board');
-  var ctx = canvas.getContext('2d');
+
 }
 }
