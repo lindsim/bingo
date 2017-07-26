@@ -3,8 +3,8 @@
 body {
   text-align: center;
   position: relative;
+  font-size: 1.5em;
   font-color: black;
-  font-size: 30px;
   font-family: 'Raleway', sans-serif;
 }
 
@@ -21,27 +21,51 @@ h2 {
   font-size: 1em;
 }
 
-.button-square {
-  background-color: snow;
-  font-size: 1em;
-  width: 6em;
-  height: 6em;
-  margin: 0.1em;
+button {
+  border-radius: 0.4em;
+  -webkit-border-radius: 0.4em;
+  -moz-border-radius: 0.4em;
+  border: none;
+  box-shadow: 0.2em 0.2em #ff7373;
+  -webkit-box-shadow: 0.2em 0.2em #ff7373;
+  -moz-box-shadow: 0.2em 0.2em #ff7373;
+  background: #ffb5b5
 }
 
+button:active {
+  box-shadow: inset 0.05em 0.05em #cc2727;
+    -webkit-box-shadow: inset 0.05em 0.05em #cc2727;
+    -moz-box-shadow: inset 0.05em 0.05em #cc2727;
+  background: #ff5252;
+}
+
+button:hover {
+ box-shadow: 0.2em 0.2em #cc2727;
+    -webkit-box-shadow: 0.2em 0.2em #cc2727;
+    -moz-box-shadow: 0.2em 0.2em #cc2727;
+  background: #ff5252;
+}
+.button-control {
+  padding: 1em;
+  font-size: 0.8em;
+}
+
+.button-square {
+  font-size: 1em;
+  width: 5em;
+  height: 5em;
+  margin: 0.2em;
+}
+
+
 .bingoboard {
-  background-color: lightblue;
+  background-color: none;
   display: inline-block;
-  width: 19em;
-  height: 18.6em;
+  width: 16.4em;
+  height: 16em;
   padding-top: 0.3em;
   padding-bottom: 0.3em;
   margin: 1em;
 }
 
-.button-control{
-  background-color: lightblue;
-  font-size: 0.8em;
-  padding: 1em;
-  border-radius: 1em;
-}
+

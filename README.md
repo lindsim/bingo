@@ -11,9 +11,12 @@ In most bingo games, getting one column or one row filled with marked squares is
 
 
 
- I spent some of time thinking about the best way to determine when bingo occurs. Each square has an id value from 0 to <em>size^2 - 1</em>. Square 0 would be in the upper left corner; square 2 would be in the upper right corner. I considered a few different ways to track bingos and decided to keep a list of the unmarked squares. I will remove the id of a button from unmarked once it is marked then either: <br>
+ I spent some time thinking about the best way to determine when bingo occurs. Each square has an id value from 0 to <em>size^2 - 1</em>. Square 0 would be in the upper left corner; square 2 would be in the upper right corner. I considered a few different ways to track bingos and decided to keep a list of the unmarked squares. I will remove the id of a button from unmarked once it is marked then either: <br>
  A. replace it in the possible bingos list of lists with 'true.' If all of the possible bingos are true within a sublist, a bingo has occured and the game is over.  <br>
  B. add the marked square's id to a set and compare the marked square set to possible bingo set. If the bingo set is within the marked set, bingo has occured. <br>
+ C. something else I haven't thought about yet because I'm unfamiliar with Javascript runtimes and all the possibilities. <br>
 
+Also, if I used the traditional 'free space' designation in the bingo game (meaning the middle space is already marked and always marked), it will change how I'd need to go about checking for a bingo on the diagonals and the middle row and middle column. <br>
 
+I also spent some time thinking about how to best choose phrases at random, or nearly random, from the different options available. One way is to choose random ints from a range of ints and add them to what will essentially be the list of keys (to use with the values of the phrases). Another would be to shuffle the phrases (using Durstenfeld's method) then return index 0 to sizesq phrases each time. <br>
 
