@@ -1,8 +1,8 @@
-function newGame(size) {
+function newGame() {
   //get input if needbe to assign these variables
   //start game
   //if current size == past size, no need to call makeBoard();
-
+  var size = 3;
   var sizesq = size * size;
   var phrases_file = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
   fillBoard();
@@ -15,7 +15,8 @@ function newGame(size) {
     }
   }
 
-  function mark(the_button){;
+  function mark(){
+    alert('HOTDOG!');
   }
 
   function createSquares() {
@@ -24,8 +25,8 @@ function newGame(size) {
     for (var x = 0; x < sizesq; x++){
         var button     = document.createElement('button');
         button.className = 'button-square';
-        button.name = x;
-        button.addEventListener('click', mark(button.id), false);
+        button.id = x;
+        button.addEventListener('click', mark(), false);
         button.innerHTML = phrases_file[phrases[x]];
         document.getElementById('firstboard').appendChild(button);
     }

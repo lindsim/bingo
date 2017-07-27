@@ -4,7 +4,7 @@ body {
   text-align: center;
   position: relative;
   font-size: 1.5em;
-  font-color: black;
+  color: black;
   font-family: 'Raleway', sans-serif;
 }
 
@@ -26,24 +26,21 @@ button {
   -webkit-border-radius: 0.4em;
   -moz-border-radius: 0.4em;
   border: none;
-  box-shadow: 0.2em 0.2em #ff7373;
-  -webkit-box-shadow: 0.2em 0.2em #ff7373;
-  -moz-box-shadow: 0.2em 0.2em #ff7373;
-  background: #ffb5b5
-}
-
-button:active {
-  box-shadow: inset 0.05em 0.05em #cc2727;
-    -webkit-box-shadow: inset 0.05em 0.05em #cc2727;
-    -moz-box-shadow: inset 0.05em 0.05em #cc2727;
+  box-shadow: 0.2em 0.2em #cc2727;
+  -webkit-box-shadow: 0.2em 0.2em #cc2727;
+  -moz-box-shadow: 0.2m 0.2em #cc2727;
   background: #ff5252;
 }
 
-button:hover {
- box-shadow: 0.2em 0.2em #cc2727;
-    -webkit-box-shadow: 0.2em 0.2em #cc2727;
-    -moz-box-shadow: 0.2em 0.2em #cc2727;
-  background: #ff5252;
+
+
+button:hover, button:active, button:focus {
+ outline: none;
+ border: none;
+ box-shadow: 0.15em 0.15em  #ff5252;
+    -webkit-box-shadow: 0.15em 0.15em  #ff5252;
+    -moz-box-shadow: 0.15em 0.15em #ff5252;
+  background: #ff8585;
 }
 .button-control {
   padding: 1em;
