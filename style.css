@@ -32,7 +32,17 @@ button {
   background: #ff5252;
 }
 
-
+.marked {
+  filter: hue-rotate(200deg);
+  font-size: 1em;
+  width: 5em;
+  height: 5em;
+  margin: 0.2em;
+  box-shadow: 0.15em 0.15em #cc2727;
+  -webkit-box-shadow: 0.15em 0.15em #cc2727;
+  -moz-box-shadow: 0.15m 0.15em #cc2727;
+  background: #ff5252;
+}
 
 button:hover, button:active, button:focus {
  outline: none;
@@ -42,6 +52,7 @@ button:hover, button:active, button:focus {
     -moz-box-shadow: 0.15em 0.15em #ff5252;
   background: #ff8585;
 }
+
 .button-control {
   padding: 1em;
   font-size: 0.8em;
