@@ -1,10 +1,27 @@
 <!DOCTYPE html>
 <html>
   <meta charset="utf-8">
-  <head> <script type="text/javascript" src="gameplay.js"></script>
-  <link href="style.css" rel="stylesheet"></link>
-  <title>Lifetime Bingo</title>
-  </head>
+  <head> 
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+
+  <script>
+  // Initialize Firebase
+
+    var config = {
+      apiKey: "AIzaSyAHWkb-dgkmVYNR69Wa3b3-0FiMaasWoYg",
+      authDomain: "bingo-5a162.firebaseapp.com",
+      databaseURL: "https://bingo-5a162.firebaseio.com",
+      projectId: "bingo-5a162",
+      storageBucket: "bingo-5a162.appspot.com",
+      messagingSenderId: "567675828606"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script type="text/javascript" src="gameplay.js"></script>
+    <link href="style.css" rel="stylesheet"></link>
+    <title>Lifetime Bingo</title>
+  </head>
   <body>
     <h1>Lifetime Bingo</h1>
     <h2>Click a square to mark or remove the mark.</h2>

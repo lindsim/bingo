@@ -121,16 +121,8 @@ function newGame(first) {
     }
   }
   
-  function getPhrasesShuffle () {
-  }
 
-  function getIndexesRandom() {
-    var numSet = new Set();
-    while (numSet.size < (size * size)) {
-      numSet.add(Math.floor(Math.random() * 12));
-    }
-    return numSet;
-  }
+
 
   function getNewPhrases() {
     var phrases = [...getIndexesRandom()];
