@@ -1,81 +1,132 @@
-function newGame() {
+function newGame(first) {
   //get input if needbe to assign these variables
-  //if current size == past size, no need to call makeBoard();
+  //when add size options: if current size == past size, no need to call makeBoard();
   var size = 3;
-  var sizesq = size * size;
+  var past_size = 3;
+  var boardmodel= [];
   var phrases_file = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
-  var bingos = [];
-  var needed_squares = [];
-  var marked = new Set();
-  fillBoard();
 
-  function fillBoard(){
-    if (document.getElementsByClassName('button-square').length < 1){
-      createSquares();
-      makeBingos();
-    } else {
+  if (first == true){
+    createSquares();
+    clearBoardModel();
+  } else {
       getNewPhrases();
-    }
+      clearBoardModel(); 
   }
-        
-  function makeBingos(){
-    for (var b = 0; b < size; b++){
-      var r_bingo = new Set();
-      var c_bingo = new Set();
-      for (var t = 0; t < size; t++){
-        r_bingo.add((b * size) + t);
-        c_bingo.add((t* size) + b); 
-      }
-    bingos.push(r_bingo);
-    bingos.push(c_bingo); 
-    }
   
-   if (size % 2 !== 0){
-     var d0_bingo = new Set();
-     var d1_bingo = new Set();
-     for (var k = 0; k < size; k++){
-        d0_bingo.add(k * (size + 1)); 
-        d1_bingo.add((k + 1) * (size - 1)); 
+        
+  
+  function checkBingo(row, col){
+    if (checkRow() === true){
+      gameWon();
+      return;
+    } else if (checkCol() === true){
+      gameWon();
+      return;
+    } else if (checkDiagOne() === true){
+      gameWon();
+      return;
+    } else if (checkDiagTwo()===true){
+      gameWon();
+      return;
+    } else {
+      return;
+    }
+
+    function checkRow(){
+      var x = 0;
+      while (x < size){
+        if (boardmodel[row][x] != 1){
+          return false;
+        } else {
+          x++;
+        }
       }
-      bingos.push(d0_bingo);
-      bingos.push(d1_bingo);
+      return true;
+    }
+
+    function checkCol(){
+      var x = 0;
+      while (x < size) {
+        if (boardmodel[x][col] != 1){
+          return false;
+        } else {
+          x++;
+        }
+      }
+      return true;
+    }
+
+    function checkDiagOne() {
+      var x = 0;
+      while (x < size) {
+        if (boardmodel[x][x] != 1){
+          return false;
+        } else {
+          x++;
+        }
+      }
+      return true;
+    }
+
+    function checkDiagTwo() {
+      var x = 0;
+      while (x < size) {
+        if (boardmodel[x][size - x - 1] != 1){
+          return false;
+        } else {
+          x++;
+        }
+      }
+      return true;
     }
   }
 
   function mark(e){
     var cur_btn = document.getElementById(e.target.id)
+    var row = Math.floor(cur_btn.id/size);
+    var col = Math.floor(cur_btn.id % size);
     if (cur_btn.className === 'marked'){
-      cur_btn.className = 'button-square'; 
-      marked.delete(Number(cur_btn.id));
+      cur_btn.className = 'button-square';
+      boardmodel[row][col]= 0; 
     } else {
       cur_btn.className = 'marked';
-      marked.add(Number(cur_btn.id));
-      bingoCheck();
+      boardmodel[row][col] = 1;
+      checkBingo(row, col);
     }
   }
   
 
   function createSquares() {
     var phrases = [...getIndexesRandom()];
-
-    for (var x = 0; x < sizesq; x++){
+      for (var x = 0; x < (size * size); x++){
         var button = document.createElement('button');
         button.className = 'button-square';
         button.id = x;
-        button.textContent = phrases_file[phrases[x]];
+        button.textContent = phrases_file[x];
         document.getElementById('firstboard').appendChild(button);
         button.onclick = mark;
         //remember, no parens beacause assigning function NOT calling it
-      }
-
+    }
   }
 
+  function clearBoardModel(){
+    boardmodel = [];
+    for (var y = 0; y < size; y++){
+      var row_col = [];
+      for (var x = 0; x < size; x++){
+        row_col.push(0);
+      }
+      boardmodel.push(row_col);
+    }
+  }
+  
   function getPhrasesShuffle () {
   }
 
   function getIndexesRandom() {
     var numSet = new Set();
-    while (numSet.size < sizesq) {
+    while (numSet.size < (size * size)) {
       numSet.add(Math.floor(Math.random() * 12));
     }
     return numSet;
@@ -83,36 +134,13 @@ function newGame() {
 
   function getNewPhrases() {
     var phrases = [...getIndexesRandom()];
-      for (var i = 0; i < sizesq; i++){
+      for (var i = 0; i < (size * size); i++){
         document.getElementById(i).textContent = phrases_file[phrases[i]];
         document.getElementById(i).className = 'button-square';
       }
     }
 
-
-  function bingoCheck() {
-    bingos.forEach(function(bingo_set){
-     if (marked.isSuperset(bingo_set) === true ){
-       gameWon();
-       return;
-     } else {
-       return
-     };
-    })
-  }
-
-
   function gameWon() {
     alert("BINGO!!!!!!!!!!!! You won!");
-  
   }
-
-  Set.prototype.isSuperset = function(subset) {
-    for (var elem of subset) {
-        if (!this.has(elem)) {
-            return false;
-        }
-    }
-    return true;
-}
 }
