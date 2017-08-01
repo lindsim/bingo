@@ -1,19 +1,23 @@
+
 function newGame(first) {
   //get input if needbe to assign these variables
   //when add size options: if current size == past size, no need to call makeBoard();
   var size = 3;
   var past_size = 3;
   var boardmodel= [];
-  var phrases_file = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+  var db = firebase.database();  
+  var allPhrases = [];
+  var numArray = [...getIndexes()]
 
   if (first == true){
-    createSquares();
+    getData();
     clearBoardModel();
   } else {
-      getNewPhrases();
-      clearBoardModel(); 
+    getNewPhrases();
+    clearBoardModel(); 
   }
   
+
         
   
   function checkBingo(row, col){
@@ -97,13 +101,12 @@ function newGame(first) {
   }
   
 
-  function createSquares() {
-    var phrases = [...getIndexesRandom()];
+  function createSquares(phrases) {
       for (var x = 0; x < (size * size); x++){
         var button = document.createElement('button');
         button.className = 'button-square';
         button.id = x;
-        button.textContent = phrases_file[x];
+        button.textContent = phrases[x];
         document.getElementById('firstboard').appendChild(button);
         button.onclick = mark;
         //remember, no parens beacause assigning function NOT calling it
@@ -120,14 +123,11 @@ function newGame(first) {
       boardmodel.push(row_col);
     }
   }
-  
-
-
 
   function getNewPhrases() {
-    var phrases = [...getIndexesRandom()];
+    var phrases = getData();
       for (var i = 0; i < (size * size); i++){
-        document.getElementById(i).textContent = phrases_file[phrases[i]];
+        document.getElementById(i).textContent = allPhrases[0][numArray[i]];
         document.getElementById(i).className = 'button-square';
       }
     }
@@ -135,4 +135,35 @@ function newGame(first) {
   function gameWon() {
     alert("BINGO!!!!!!!!!!!! You won!");
   }
+
+
+
+
+
+    function getIndexes (){
+        var numSet = new Set();
+            while (numSet.size < (size * size)){
+                numSet.add(Math.floor(Math.random() * 65));
+            }  
+        return numSet;
+
+        }
+
+    function getData(){
+        db.ref('phrases').once('value').then(function(snapshot) {
+          var currentPhrase= snapshot.val();
+          allPhrases.push(currentPhrase);
+          console.log(allPhrases[0][29]);
+      }).then(function(){
+          var phrases = [];
+          for (var x = 0; x < (size * size); x++){
+            phrases.push(allPhrases[0][numArray[x]]);
+          }
+        createSquares(phrases);
+        })
+      
+      
+    }
+   
 }
+  
